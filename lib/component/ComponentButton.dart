@@ -9,8 +9,9 @@ class ComponentButtonPrimary extends StatelessWidget {
   Function? func;
   Color? colorButton = ColorApp.PrimaryColor;
   double? sizeTextButton = SizeApp.SizeTextDescription;
+  String? routeName;
   ComponentButtonPrimary(this.buttonName, this.func,
-      {this.colorButton, this.sizeTextButton});
+      {this.colorButton, this.sizeTextButton, this.routeName});
   @override
   Widget build(BuildContext context) {
     return _Button(context, func, buttonName);
@@ -21,7 +22,7 @@ class ComponentButtonPrimary extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20.h),
       child: ElevatedButton(
         onPressed: () {
-          function;
+          Navigator.of(context).pushNamed(routeName.toString());
         },
         child: ComponentTextPrimaryTittleBold(
           teks: buttonName,

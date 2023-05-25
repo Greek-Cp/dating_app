@@ -9,4 +9,9 @@ class ColorApp {
   static const TextSecondaryColor = Color.fromARGB(255, 180, 174, 174);
   static const DotsColorUnselect = TextSecondaryColor;
   static const DotsColorSelected = PrimaryColor;
+  static const BackgroundNavigationBottomColor =
+      Color.fromARGB(255, 243, 243, 243);
+  static const ColorUnSelectedNavigationItem =
+      Color.fromARGB(255, 173, 175, 187);
+  static const ColorSelectedNavigationItem = Color.fromARGB(255, 233, 64, 87);
 }

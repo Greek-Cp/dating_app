@@ -26,6 +26,7 @@ dependencies:
   intl: ^0.17.0
   audioplayers: ^4.0.1
   carousel_slider: ^4.2.1
+  swipe_cards: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +37,12 @@ flutter:
   uses-material-design: true
   assets:
     - assets/ic_logo.png
+    - assets/ic_back.png
+    - assets/ic_nav_denied.png
+    - assets/ic_nav_history_like.png
+    - assets/ic_nav_home.png
+    - assets/ic_nav_message.png
+    - assets/ic_nav_people.png
+    - assets/ic_nav_stras.png
+    - assets/ic_setting_config.png
+    

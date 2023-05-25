@@ -1,6 +1,7 @@
 import 'package:dating_app/component/ComponentText.dart';
 import 'package:dating_app/component/ComponentButton.dart';
 import 'package:dating_app/model/ModelIntro.dart';
+import 'package:dating_app/page/PageFindPeople.dart';
 
 import 'package:dating_app/util/ColorApp.dart';
 import 'package:dating_app/util/SizeApp.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'PageBaseNavigation.dart';
 
 class PagePerkenalan extends StatefulWidget {
   static String? routeName = "/PagePerkenalann";
@@ -43,107 +46,118 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
       builder: (context, child) {
         return Scaffold(
           body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: SizeApp.SizePaddingHorizontal.sp,
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  CarouselSlider.builder(
-                    carouselController: carouselController,
-                    options: CarouselOptions(
-                      initialPage: current,
-                      height: 280.0,
-                      viewportFraction: 0.6,
-                      enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                      enlargeCenterPage: true,
-                      enlargeFactor: 0.5,
-                      autoPlay: true,
-                      reverse: false,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          current = index;
-                        });
-                      },
-                      enableInfiniteScroll: true,
-                      autoPlayInterval: Duration(seconds: 2),
-                      autoPlayAnimationDuration: Duration(milliseconds: 2000),
-                      scrollDirection: Axis.horizontal,
-                    ),
-                    itemCount: listDataIntro.length,
-                    itemBuilder: (context, index, realIndex) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.network(
-                          listDataIntro[index].imageLink.toString(),
-                          fit: BoxFit.fill,
-                        ),
-                      );
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30.h,
+                ),
+                CarouselSlider.builder(
+                  carouselController: carouselController,
+                  options: CarouselOptions(
+                    initialPage: current,
+                    height: 400.0,
+                    viewportFraction: 0.75,
+                    enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                    enlargeCenterPage: true,
+                    enlargeFactor: 0.5,
+                    autoPlay: true,
+                    reverse: false,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        current = index;
+                      });
                     },
+                    enableInfiniteScroll: true,
+                    autoPlayInterval: Duration(seconds: 2),
+                    autoPlayAnimationDuration: Duration(milliseconds: 2000),
+                    scrollDirection: Axis.horizontal,
                   ),
-                  SizedBox(
-                    height: 30.h,
+                  itemCount: listDataIntro.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        listDataIntro[index].imageLink.toString(),
+                        fit: BoxFit.fill,
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                ComponentTextPrimaryTittleBold(
+                  teks: "${listDataIntro[current].HeaderName}",
+                  size: SizeApp.SizeTextHeader.sp,
+                  colorText: ColorApp.PrimaryColor,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeApp.SizePaddingHorizontal.sp,
                   ),
-                  ComponentTextPrimaryTittleBold(
-                    teks: "${listDataIntro[current].HeaderName}",
-                    size: SizeApp.SizeTextHeader.sp,
-                    colorText: ColorApp.PrimaryColor,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  ComponentTextPrimaryDescriptionRegular(
+                  child: ComponentTextPrimaryDescriptionRegular(
                     teks: "${listDataIntro[current].descriptionName}",
                     textAlign: TextAlign.center,
                     size: SizeApp.SizeTextDescription.sp,
                   ),
-                  SizedBox(
-                    height: 20.h,
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: listDataIntro.asMap().entries.map((entry) {
+                    return GestureDetector(
+                      onTap: () => carouselController.animateToPage(entry.key),
+                      child: Container(
+                        width: 12.0.w,
+                        height: 12.0.h,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0.w, horizontal: 4.0.h),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: current == entry.key
+                                ? ColorApp.DotsColorSelected
+                                : ColorApp.DotsColorUnselect),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                Expanded(child: Text("")),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeApp.SizePaddingHorizontal.sp,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: listDataIntro.asMap().entries.map((entry) {
-                      return GestureDetector(
-                        onTap: () =>
-                            carouselController.animateToPage(entry.key),
-                        child: Container(
-                          width: 12.0.w,
-                          height: 12.0.h,
-                          margin: EdgeInsets.symmetric(
-                              vertical: 8.0.w, horizontal: 4.0.h),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: current == entry.key
-                                  ? ColorApp.DotsColorSelected
-                                  : ColorApp.DotsColorUnselect),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  ComponentButtonPrimary(
+                  child: ComponentButtonPrimary(
                     "Create an account",
-                    () => {},
+                    () => {
+                      Navigator.of(context)
+                          .pushNamed(PageFindPeople.routeName.toString())
+                    },
+                    routeName: PageBaseNavigation.routeName.toString(),
                     sizeTextButton: SizeApp.SizeTextDescription.sp,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ComponentTextPrimaryDescriptionRegular(
-                        teks: "Already have an account?",
-                        textAlign: TextAlign.center,
-                      ),
-                      ComponentTextPrimaryDescriptionBold(
-                        teks: "Sign In",
-                        textAlign: TextAlign.center,
-                        colorText: ColorApp.PrimaryColor,
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ComponentTextPrimaryDescriptionRegular(
+                      teks: "Already have an account?",
+                      textAlign: TextAlign.center,
+                      size: SizeApp.SizeTextDescription.sp,
+                    ),
+                    ComponentTextPrimaryDescriptionBold(
+                      teks: "Sign In",
+                      textAlign: TextAlign.center,
+                      colorText: ColorApp.PrimaryColor,
+                      size: SizeApp.SizeTextDescription.sp,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                )
+              ],
             ),
           ),
         );
