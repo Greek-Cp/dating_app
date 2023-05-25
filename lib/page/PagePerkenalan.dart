@@ -1,6 +1,13 @@
+import 'package:dating_app/component/ComponentText.dart';
+import 'package:dating_app/component/ComponentButton.dart';
+import 'package:dating_app/model/ModelIntro.dart';
+
+import 'package:dating_app/util/ColorApp.dart';
+import 'package:dating_app/util/SizeApp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PagePerkenalan extends StatefulWidget {
   static String? routeName = "/PagePerkenalann";
@@ -9,57 +16,135 @@ class PagePerkenalan extends StatefulWidget {
 }
 
 class _PagePerkenalanState extends State<PagePerkenalan> {
-  List<String> listImageCarousel = [
-    "https://plus.unsplash.com/premium_photo-1671586882920-8cd59c84cdfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1545912452-8aea7e25a3d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+  List<ModelIntro> listDataIntro = [
+    ModelIntro(
+      "Algorithm",
+      "Users going through a vetting process to ensure you never match with bots.",
+      "https://plus.unsplash.com/premium_photo-1671586882920-8cd59c84cdfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    ),
+    ModelIntro(
+      "Matches",
+      "We match you with people that have a large array of similar interests.",
+      "https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    ),
+    ModelIntro(
+      "Premium",
+      "Sign up today and enjoy the first month of premium benefits on us.",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    )
   ];
   int current = 0;
+  final CarouselController carouselController = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ScreenUtilInit(
       builder: (context, child) {
         return Scaffold(
-          body: Column(
-            children: [
-              Text(
-                "HEllo",
-                style: TextStyle(fontSize: 40),
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: SizeApp.SizePaddingHorizontal.sp,
               ),
-              CarouselSlider.builder(
-                initialPage: current,
-                itemCount: listImageCarousel.length,
-                height: 400.0,
-                enlargeCenterPage: true,
-                autoPlay: true,
-                reverse: false,
-                enableInfiniteScroll: true,
-                autoPlayInterval: Duration(seconds: 2),
-                autoPlayAnimationDuration: Duration(milliseconds: 2000),
-                pauseAutoPlayOnTouch: Duration(seconds: 10),
-                scrollDirection: Axis.horizontal,
-                onPageChanged: (index) {
-                  setState(() {
-                    current = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 10.0.h),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  CarouselSlider.builder(
+                    carouselController: carouselController,
+                    options: CarouselOptions(
+                      initialPage: current,
+                      height: 280.0,
+                      viewportFraction: 0.6,
+                      enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                      enlargeCenterPage: true,
+                      enlargeFactor: 0.5,
+                      autoPlay: true,
+                      reverse: false,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          current = index;
+                        });
+                      },
+                      enableInfiniteScroll: true,
+                      autoPlayInterval: Duration(seconds: 2),
+                      autoPlayAnimationDuration: Duration(milliseconds: 2000),
+                      scrollDirection: Axis.horizontal,
                     ),
-                    child: Image.network(
-                      listImageCarousel[index],
-                      fit: BoxFit.fill,
-                    ),
-                  );
-                },
-              )
-            ],
+                    itemCount: listDataIntro.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          listDataIntro[index].imageLink.toString(),
+                          fit: BoxFit.fill,
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  ComponentTextPrimaryTittleBold(
+                    teks: "${listDataIntro[current].HeaderName}",
+                    size: SizeApp.SizeTextHeader.sp,
+                    colorText: ColorApp.PrimaryColor,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  ComponentTextPrimaryDescriptionRegular(
+                    teks: "${listDataIntro[current].descriptionName}",
+                    textAlign: TextAlign.center,
+                    size: SizeApp.SizeTextDescription.sp,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: listDataIntro.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () =>
+                            carouselController.animateToPage(entry.key),
+                        child: Container(
+                          width: 12.0.w,
+                          height: 12.0.h,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 8.0.w, horizontal: 4.0.h),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: current == entry.key
+                                  ? ColorApp.DotsColorSelected
+                                  : ColorApp.DotsColorUnselect),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  ComponentButtonPrimary(
+                    "Create an account",
+                    () => {},
+                    sizeTextButton: SizeApp.SizeTextDescription.sp,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ComponentTextPrimaryDescriptionRegular(
+                        teks: "Already have an account?",
+                        textAlign: TextAlign.center,
+                      ),
+                      ComponentTextPrimaryDescriptionBold(
+                        teks: "Sign In",
+                        textAlign: TextAlign.center,
+                        colorText: ColorApp.PrimaryColor,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
         );
       },

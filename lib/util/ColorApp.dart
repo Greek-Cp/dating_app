@@ -7,4 +7,6 @@ class ColorApp {
   static const SecondaryButtonColor = Color.fromARGB(255, 253, 236, 238);
   static const TextPrimaryColor = Color.fromARGB(255, 0, 0, 0);
   static const TextSecondaryColor = Color.fromARGB(255, 180, 174, 174);
+  static const DotsColorUnselect = TextSecondaryColor;
+  static const DotsColorSelected = PrimaryColor;
 }
