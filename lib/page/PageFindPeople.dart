@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dating_app/component/ComponentText.dart';
 
 import 'package:dating_app/model/ModelDiscoveryPeople.dart';
@@ -158,11 +160,11 @@ class _PageFindPeopleState extends State<PageFindPeople> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ComponentTextPrimaryTittleBold(
-                        teks: "Discover",
+                        teks: "Cari Pasangan",
                         size: SizeApp.SizeTextHeader.sp,
                       ),
                       ComponentTextPrimaryDescriptionRegular(
-                        teks: "BTEC FPT",
+                        teks: "Premium",
                         size: SizeApp.SizeTextDescription.sp,
                         colorText: ColorApp.TextSecondaryColor,
                       )
@@ -192,12 +194,17 @@ class _PageFindPeopleState extends State<PageFindPeople> {
                     return Center(
                       child: Stack(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20.r),
-                            child: Image.network(
-                              _swipeItems[index].content.imgProfile,
-                              width: 300.w,
-                              fit: BoxFit.cover,
+                          Card(
+                            elevation: 30.h,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.r)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.r),
+                              child: Image.network(
+                                _swipeItems[index].content.imgProfile,
+                                width: 300.w,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Padding(
@@ -236,30 +243,57 @@ class _PageFindPeopleState extends State<PageFindPeople> {
                             ),
                           ),
                           Positioned(
-                            bottom: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ComponentTextPrimaryTittleBold(
-                                    teks: _swipeItems[index]
-                                            .content
-                                            .namePeople +
-                                        ", ${_swipeItems[index].content.age}",
-                                    colorText: Colors.white,
-                                    size: SizeApp.SizeTextHeader.sp,
+                              bottom: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.2),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.h),
+                                            child:
+                                                ComponentTextPrimaryTittleBold(
+                                              teks: _swipeItems[index]
+                                                      .content
+                                                      .namePeople +
+                                                  ", ${_swipeItems[index].content.age}",
+                                              colorText: Colors.white,
+                                              size: SizeApp.SizeTextHeader.sp,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.h),
+                                            child:
+                                                ComponentTextPrimaryTittleRegular(
+                                              teks: _swipeItems[index]
+                                                  .content
+                                                  .job,
+                                              colorText: Colors.white,
+                                              size: SizeApp
+                                                  .SizeTextDescription.sp,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  ComponentTextPrimaryTittleRegular(
-                                    teks: _swipeItems[index].content.job,
-                                    colorText: Colors.white,
-                                    size: SizeApp.SizeTextDescription.sp,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
+                                ),
+                              ))
                         ],
                       ),
                     );
@@ -320,7 +354,7 @@ class _PageFindPeopleState extends State<PageFindPeople> {
                         child: IconButton(
                           icon: Icon(Icons.favorite),
                           color: Colors.white,
-                          iconSize: 70,
+                          iconSize: 50,
                           onPressed: () {
                             _matchEngine!.currentItem?.superLike();
                           },

@@ -1,5 +1,8 @@
 import 'package:dating_app/page/PageBaseNavigation.dart';
 import 'package:dating_app/page/PageFindPeople.dart';
+import 'package:dating_app/page/PageInputPhoneNumber.dart';
+import 'package:dating_app/page/PageLogin.dart';
+import 'package:dating_app/page/PageOtpCode.dart';
 import 'package:dating_app/page/PagePerkenalan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +28,11 @@ class MainApp extends StatelessWidget {
         PagePerkenalan.routeName.toString(): (context) => PagePerkenalan(),
         PageFindPeople.routeName.toString(): (context) => PageFindPeople(),
         PageBaseNavigation.routeName.toString(): (context) =>
-            PageBaseNavigation()
+            PageBaseNavigation(),
+        PageLogin.routeName.toString(): (context) => PageLogin(),
+        PageInputPhoneNumber.routeName.toString(): (context) =>
+            PageInputPhoneNumber(),
+        PageOtpCode.routeName.toString(): (context) => PageOtpCode()
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:dating_app/component/ComponentText.dart';
 import 'package:dating_app/component/ComponentButton.dart';
 import 'package:dating_app/model/ModelIntro.dart';
 import 'package:dating_app/page/PageFindPeople.dart';
+import 'package:dating_app/page/PageLogin.dart';
 
 import 'package:dating_app/util/ColorApp.dart';
 import 'package:dating_app/util/SizeApp.dart';
@@ -56,7 +57,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                   options: CarouselOptions(
                     initialPage: current,
                     height: 400.0,
-                    viewportFraction: 0.75,
+                    viewportFraction: 0.73,
                     enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                     enlargeCenterPage: true,
                     enlargeFactor: 0.5,
@@ -84,7 +85,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                   },
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
                 ComponentTextPrimaryTittleBold(
                   teks: "${listDataIntro[current].HeaderName}",
@@ -102,7 +103,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +124,9 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                     );
                   }).toList(),
                 ),
-                Expanded(child: Text("")),
+                SizedBox(
+                  height: 15.h,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: SizeApp.SizePaddingHorizontal.sp,
@@ -132,11 +135,14 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                     "Create an account",
                     () => {
                       Navigator.of(context)
-                          .pushNamed(PageFindPeople.routeName.toString())
+                          .pushNamed(PageLogin.routeName.toString())
                     },
-                    routeName: PageBaseNavigation.routeName.toString(),
+                    routeName: PageLogin.routeName.toString(),
                     sizeTextButton: SizeApp.SizeTextDescription.sp,
                   ),
+                ),
+                SizedBox(
+                  height: 5.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -147,7 +153,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                       size: SizeApp.SizeTextDescription.sp,
                     ),
                     ComponentTextPrimaryDescriptionBold(
-                      teks: "Sign In",
+                      teks: " Sign In",
                       textAlign: TextAlign.center,
                       colorText: ColorApp.PrimaryColor,
                       size: SizeApp.SizeTextDescription.sp,
@@ -155,7 +161,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                   ],
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 10.h,
                 )
               ],
             ),
