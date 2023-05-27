@@ -6,6 +6,7 @@ import 'package:dating_app/page/PageOtpCode.dart';
 import 'package:dating_app/page/PagePerkenalan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,18 +23,30 @@ class MainApp extends StatelessWidget {
         SystemUiOverlay.top, // Shows Status bar and hides Navigation bar
       ],
     );
-    return MaterialApp(
+    return GetMaterialApp(
       initialRoute: PagePerkenalan.routeName.toString(),
-      routes: {
-        PagePerkenalan.routeName.toString(): (context) => PagePerkenalan(),
-        PageFindPeople.routeName.toString(): (context) => PageFindPeople(),
-        PageBaseNavigation.routeName.toString(): (context) =>
-            PageBaseNavigation(),
-        PageLogin.routeName.toString(): (context) => PageLogin(),
-        PageInputPhoneNumber.routeName.toString(): (context) =>
-            PageInputPhoneNumber(),
-        PageOtpCode.routeName.toString(): (context) => PageOtpCode()
-      },
+      transitionDuration: Duration(seconds: 3),
+      defaultTransition: Transition.circularReveal,
+      getPages: [
+        GetPage(
+            name: PagePerkenalan.routeName.toString(),
+            page: () => PagePerkenalan()),
+        GetPage(
+            name: PageFindPeople.routeName.toString(),
+            page: () => PageFindPeople()),
+        GetPage(
+            name: PageBaseNavigation.routeName.toString(),
+            page: () => PageBaseNavigation()),
+        GetPage(
+            name: PagePerkenalan.routeName.toString(),
+            page: () => PagePerkenalan()),
+        GetPage(name: PageLogin.routeName.toString(), page: () => PageLogin()),
+        GetPage(
+            name: PageInputPhoneNumber.routeName.toString(),
+            page: () => PageInputPhoneNumber()),
+        GetPage(
+            name: PageOtpCode.routeName.toString(), page: () => PageOtpCode()),
+      ],
     );
   }
 }

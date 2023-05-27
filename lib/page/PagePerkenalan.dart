@@ -1,5 +1,6 @@
 import 'package:dating_app/component/ComponentText.dart';
 import 'package:dating_app/component/ComponentButton.dart';
+import 'package:dating_app/controller/ContentController.dart';
 import 'package:dating_app/model/ModelIntro.dart';
 import 'package:dating_app/page/PageFindPeople.dart';
 import 'package:dating_app/page/PageLogin.dart';
@@ -9,6 +10,7 @@ import 'package:dating_app/util/SizeApp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'PageBaseNavigation.dart';
@@ -20,29 +22,14 @@ class PagePerkenalan extends StatefulWidget {
 }
 
 class _PagePerkenalanState extends State<PagePerkenalan> {
-  List<ModelIntro> listDataIntro = [
-    ModelIntro(
-      "Algorithm",
-      "Users going through a vetting process to ensure you never match with bots.",
-      "https://plus.unsplash.com/premium_photo-1671586882920-8cd59c84cdfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    ),
-    ModelIntro(
-      "Matches",
-      "We match you with people that have a large array of similar interests.",
-      "https://images.unsplash.com/photo-1514315384763-ba401779410f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    ),
-    ModelIntro(
-      "Premium",
-      "Sign up today and enjoy the first month of premium benefits on us.",
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGdpcmx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    )
-  ];
   int current = 0;
   final CarouselController carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final controller = Get.put(ContentController());
+
     return ScreenUtilInit(
       builder: (context, child) {
         return Scaffold(
@@ -73,12 +60,12 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                     autoPlayAnimationDuration: Duration(milliseconds: 2000),
                     scrollDirection: Axis.horizontal,
                   ),
-                  itemCount: listDataIntro.length,
+                  itemCount: controller.listDataIntro.length,
                   itemBuilder: (context, index, realIndex) {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
-                        listDataIntro[index].imageLink.toString(),
+                        controller.listDataIntro[index].imageLink.toString(),
                         fit: BoxFit.fill,
                       ),
                     );
@@ -88,7 +75,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                   height: 10.h,
                 ),
                 ComponentTextPrimaryTittleBold(
-                  teks: "${listDataIntro[current].HeaderName}",
+                  teks: "${controller.listDataIntro[current].HeaderName}",
                   size: SizeApp.SizeTextHeader.sp,
                   colorText: ColorApp.PrimaryColor,
                 ),
@@ -97,7 +84,8 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                     horizontal: SizeApp.SizePaddingHorizontal.sp,
                   ),
                   child: ComponentTextPrimaryDescriptionRegular(
-                    teks: "${listDataIntro[current].descriptionName}",
+                    teks:
+                        "${controller.listDataIntro[current].descriptionName}",
                     textAlign: TextAlign.center,
                     size: SizeApp.SizeTextDescription.sp,
                   ),
@@ -107,7 +95,8 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: listDataIntro.asMap().entries.map((entry) {
+                  children:
+                      controller.listDataIntro.asMap().entries.map((entry) {
                     return GestureDetector(
                       onTap: () => carouselController.animateToPage(entry.key),
                       child: Container(
@@ -134,8 +123,7 @@ class _PagePerkenalanState extends State<PagePerkenalan> {
                   child: ComponentButtonPrimary(
                     "Create an account",
                     () => {
-                      Navigator.of(context)
-                          .pushNamed(PageLogin.routeName.toString())
+                      Get.toNamed(PageLogin.routeName.toString()),
                     },
                     routeName: PageLogin.routeName.toString(),
                     sizeTextButton: SizeApp.SizeTextDescription.sp,
