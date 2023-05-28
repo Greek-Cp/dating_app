@@ -3,6 +3,7 @@ import 'package:dating_app/component/ComponentText.dart';
 import 'package:dating_app/page/PageBaseNavigation.dart';
 import 'package:dating_app/page/PageFindPeople.dart';
 import 'package:dating_app/page/PageInputPhoneNumber.dart';
+import 'package:dating_app/page/PageRegister/PageRegister.dart';
 import 'package:dating_app/util/ColorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class _PageLoginState extends State<PageLogin> {
               ComponentButtonPrimary(
                 "Continue with email",
                 () => {},
-                routeName: PageBaseNavigation.routeName.toString(),
+                routeName: PageRegister.RouteName.toString(),
               ),
               SizedBox(
                 height: 15.h,

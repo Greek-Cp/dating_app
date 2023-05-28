@@ -4,6 +4,8 @@ import 'package:dating_app/page/PageInputPhoneNumber.dart';
 import 'package:dating_app/page/PageLogin.dart';
 import 'package:dating_app/page/PageOtpCode.dart';
 import 'package:dating_app/page/PagePerkenalan.dart';
+import 'package:dating_app/page/PageRegister/PageRegister.dart';
+import 'package:dating_app/page/PageRegister/PageRegisterDetailAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -46,6 +48,12 @@ class MainApp extends StatelessWidget {
             page: () => PageInputPhoneNumber()),
         GetPage(
             name: PageOtpCode.routeName.toString(), page: () => PageOtpCode()),
+        GetPage(
+            name: PageRegister.RouteName.toString(),
+            page: () => PageRegister()),
+        GetPage(
+            name: PageRegisterDetailAccount.routeName.toString(),
+            page: () => PageRegisterDetailAccount())
       ],
     );
   }
