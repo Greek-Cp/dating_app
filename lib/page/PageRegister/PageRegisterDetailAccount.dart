@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:dating_app/page/PageLogin.dart';
+import 'package:dating_app/page/PageRegister/PageChooseInterest.dart';
 import 'package:dating_app/util/ColorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
 import '../../component/ComponentButton.dart';
 import '../../component/ComponentText.dart';
 import '../../component/text_field.dart';
@@ -49,13 +50,15 @@ class _PageRegisterDetailAccountState extends State<PageRegisterDetailAccount> {
       print("eror gambar :: ${e}");
       // Navigator.of(context).pop();
     }
- 
   }
-     Future<File?> _cropImage({required File imageFile}) async {
+
+  Future<File?> _cropImage({required File imageFile}) async {
     CroppedFile? croppedImage =
         await ImageCropper().cropImage(sourcePath: imageFile.path);
     if (croppedImage == null) return null;
     return File(croppedImage.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -128,6 +131,7 @@ class _PageRegisterDetailAccountState extends State<PageRegisterDetailAccount> {
                   ComponentButtonPrimaryWithFunction(
                     "Register",
                     () {
+                      Get.toNamed(PageChooseInterest.routeName.toString());
                       if (_formKey.currentState!.validate()) {
                       } else {}
                     },

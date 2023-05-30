@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SizeApp {
-  static double SizeTextHeader = 20.sp;
+  static double SizeTextHeader = 30.sp;
   static double SizeTextDescription = 15.sp;
   static double SizeTextButton = 9.sp;
   static double SizePaddingLeft = 10.w;

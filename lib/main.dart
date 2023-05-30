@@ -4,6 +4,7 @@ import 'package:dating_app/page/PageInputPhoneNumber.dart';
 import 'package:dating_app/page/PageLogin.dart';
 import 'package:dating_app/page/PageOtpCode.dart';
 import 'package:dating_app/page/PagePerkenalan.dart';
+import 'package:dating_app/page/PageRegister/PageChooseInterest.dart';
 import 'package:dating_app/page/PageRegister/PageRegister.dart';
 import 'package:dating_app/page/PageRegister/PageRegisterDetailAccount.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,7 @@ class MainApp extends StatelessWidget {
     );
     return GetMaterialApp(
       initialRoute: PagePerkenalan.routeName.toString(),
-      transitionDuration: Duration(seconds: 3),
-      defaultTransition: Transition.circularReveal,
+      defaultTransition: Transition.native,
       getPages: [
         GetPage(
             name: PagePerkenalan.routeName.toString(),
@@ -53,7 +53,10 @@ class MainApp extends StatelessWidget {
             page: () => PageRegister()),
         GetPage(
             name: PageRegisterDetailAccount.routeName.toString(),
-            page: () => PageRegisterDetailAccount())
+            page: () => PageRegisterDetailAccount()),
+        GetPage(
+            name: PageChooseInterest.routeName.toString(),
+            page: () => PageChooseInterest())
       ],
     );
   }
