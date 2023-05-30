@@ -73,9 +73,14 @@ class ComponentTextPrimaryDescriptionRegular extends StatelessWidget {
   double? size = SizeApp.SizeTextDescription;
   Color? colorText = ColorApp.TextSecondaryColor;
   TextAlign? textAlign = TextAlign.start;
+  FontWeight? fontWeight = FontWeight.normal;
 
   ComponentTextPrimaryDescriptionRegular(
-      {this.teks, this.size, this.colorText = Colors.black, this.textAlign});
+      {this.teks,
+      this.size,
+      this.colorText = Colors.black,
+      this.textAlign,
+      this.fontWeight});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -84,7 +89,7 @@ class ComponentTextPrimaryDescriptionRegular extends StatelessWidget {
       textAlign: textAlign,
       style: GoogleFonts.poppins(
         fontSize: size,
-        fontWeight: FontWeight.normal,
+        fontWeight: fontWeight,
         textStyle: TextStyle(color: colorText),
       ),
     );
